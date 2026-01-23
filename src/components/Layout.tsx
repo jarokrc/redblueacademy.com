@@ -19,9 +19,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const { t, locale, setLocale } = useI18n();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const newsletterUrl = "https://newsletter.redblue.sk/lists/?p=subscribe&list=3";
-  const newsletterConsentToken = "{privacy_link}";
-  const newsletterConsentParts = t.newsletter.consentText.split(newsletterConsentToken);
+  // const newsletterUrl = "https://newsletter.redblue.sk/lists/?p=subscribe&list=3";
+  // const newsletterConsentToken = "{privacy_link}";
+  // const newsletterConsentParts = t.newsletter.consentText.split(newsletterConsentToken);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -45,6 +45,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
     { path: "/", title: t.pages.home.title, description: t.pages.home.lead },
     { path: "/sluzby", title: t.pages.services.title, description: t.pages.services.lead },
     { path: "/cennik", title: t.pages.pricing.title, description: t.pages.pricing.lead },
+    { path: "/technicke-podmienky", title: t.pages.tech.title, description: t.pages.tech.lead },
+    { path: "/objednavka", title: t.pages.order.title, description: t.pages.order.lead },
     { path: "/prace-studentov", title: t.pages.studentWork.title, description: t.pages.studentWork.lead },
     { path: "/faq", title: t.pages.faq.title, description: t.pages.faq.lead },
     { path: "/zasady-ochrany-osobnych-udajov", title: t.pages.privacy.title, description: t.pages.privacy.lead },
@@ -246,8 +248,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                © 2026 RedBlueAcademy.com
-              </a>
+                
+              
               <div className="flex flex-wrap items-center gap-4">
                 <Link to="/zasady-ochrany-osobnych-udajov" className="hover:text-blue-700">
                   {t.footer.privacy}
@@ -259,8 +261,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
                   {t.footer.cookies}
                 </Link>
               </div>
+              © 2026 RedBlueAcademy.com
+              </a>
             </div>
 
+            {/*
             <div className="w-full max-w-md space-y-3">
               <p className="text-sm font-semibold text-slate-900">{t.newsletter.title}</p>
               <p className="text-xs text-slate-500">{t.newsletter.description}</p>
@@ -307,6 +312,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 )}
               </p>
             </div>
+            */}
           </div>
         </div>
       </footer>

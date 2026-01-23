@@ -1,8 +1,12 @@
-const enPricing = {
+﻿const enPricing = {
   pages: {
     pricing: {
       title: "Pricing",
       lead: "Learn more, pay less — programming for students and career changers.",
+    },
+    order: {
+      title: "Order",
+      lead: "Fill in the order form and we will confirm the next steps.",
     },
   },
   pricingPage: {
@@ -64,6 +68,54 @@ const enPricing = {
       "An investment in learning can pay back quickly — a first IT role often comes with a significantly higher yearly income.",
     roiNote: "And remember: the more you learn, the less you pay per hour.",
     consultCta: "Book a free 15-minute consultation",
+    techCta: "Technical requirements for online study",
+  },
+  orderPage: {
+    intro: "Tell us your preferred study times or any extra notes.",
+    processTitle: "How does the order work?",
+    processSteps: [
+      "You submit a non-binding order.",
+      "You receive a first email with your order details; click the link to confirm they are correct.",
+      "Within 24 hours we email you: we either confirm the time from your notes or propose available slots for the month.",
+      "We call you at the phone number from the order and agree on the first 15-minute call to fine-tune the study time.",
+      "We then issue a pro forma invoice with payment by bank transfer to the company account.",
+      "Once the payment is received, we issue the invoice and you can start learning as planned.",
+    ],
+    consultProcessTitle: "How does the intro consultation work?",
+    consultProcessSteps: [
+      "We will contact you within 24 hours after you submit the order, as we are handling a higher volume of requests.",
+      "We then schedule a short 15-minute call.",
+      "We talk about your goals, conditions, and study options.",
+      "We answer your questions and suggest next steps.",
+    ],
+    packageLabel: "Package",
+    packageHint: "The package adjusts to the number of hours based on the pricing rules.",
+    hoursLabel: "Number of hours",
+    hoursHint: "1–29 = Tutor, 30–159 = Student, 160+ = Professional.",
+    savingsText: "You just saved {amount} — you are now in the {package} package.",
+    consultTitle: "Intro consultation",
+    consultDuration: "Duration: 15 minutes",
+    consultPackageValue: "Intro consultation (15 minutes)",
+    firstNameLabel: "First name",
+    lastNameLabel: "Last name",
+    emailLabel: "Email",
+    phoneLabel: "Phone number",
+    addressLabel: "Address",
+    notesLabel: "Notes",
+    notesPlaceholder: "Share preferred times or any other notes.",
+    submitOrder: "Send order",
+    submitConsultation: "Send request",
+    consentText: "I agree to the {terms_link} and acknowledge the {privacy_link}.",
+    privacyLinkLabel: "Privacy Policy",
+    termsLinkLabel: "Terms and Conditions",
+    honeypotLabel: "Website",
+    errors: {
+      hoursRequired: "Please enter the number of hours.",
+      recaptcha: "Please confirm you are not a robot.",
+      spam: "This submission looks like spam. Please try again.",
+      consentRequired: "You must agree to the terms and acknowledge the privacy policy.",
+      requiredFields: "Please fill in all required fields.",
+    },
   },
 };
 

@@ -4,6 +4,7 @@ import skServices from "./sk/services";
 import skPython from "./sk/python";
 import skCsharp from "./sk/csharp";
 import skPricing from "./sk/pricing";
+import skTech from "./sk/tech";
 import skStudentWork from "./sk/studentWork";
 import skFaq from "./sk/faq";
 import skPrivacy from "./sk/privacy";
@@ -16,6 +17,7 @@ import enServices from "./en/services";
 import enPython from "./en/python";
 import enCsharp from "./en/csharp";
 import enPricing from "./en/pricing";
+import enTech from "./en/tech";
 import enStudentWork from "./en/studentWork";
 import enFaq from "./en/faq";
 import enPrivacy from "./en/privacy";
@@ -28,6 +30,7 @@ import deServices from "./de/services";
 import dePython from "./de/python";
 import deCsharp from "./de/csharp";
 import dePricing from "./de/pricing";
+import deTech from "./de/tech";
 import deStudentWork from "./de/studentWork";
 import deFaq from "./de/faq";
 import dePrivacy from "./de/privacy";
@@ -65,6 +68,7 @@ export const translations: Record<string, Translation> = {
     skPython,
     skCsharp,
     skPricing,
+    skTech,
     skStudentWork,
     skFaq,
     skPrivacy,
@@ -79,6 +83,7 @@ export const translations: Record<string, Translation> = {
     enPython,
     enCsharp,
     enPricing,
+    enTech,
     enStudentWork,
     enFaq,
     enPrivacy,
@@ -93,6 +98,7 @@ export const translations: Record<string, Translation> = {
     dePython,
     deCsharp,
     dePricing,
+    deTech,
     deStudentWork,
     deFaq,
     dePrivacy,

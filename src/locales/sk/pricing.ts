@@ -1,8 +1,12 @@
-const skPricing = {
+﻿const skPricing = {
   pages: {
     pricing: {
       title: "Cenník",
       lead: "Uč sa viac, plať menej — programovanie pre študentov aj zmenu kariéry.",
+    },
+    order: {
+      title: "Objednávka",
+      lead: "Vyplň objednávkový formulár a ozveme sa ti s potvrdením.",
     },
   },
   pricingPage: {
@@ -65,6 +69,54 @@ const skPricing = {
       "Investícia do vzdelania sa môže vrátiť rýchlo — už prvá práca v IT často znamená výrazne vyšší ročný príjem.",
     roiNote: "A nezabúdaj — čím viac sa učíš, tým menej platíš za hodinu.",
     consultCta: "Rezervuj si 15-minútovú konzultáciu zdarma",
+    techCta: "Technické podmienky online štúdia",
+  },
+  orderPage: {
+    intro: "Napíš nám, kedy sa ti hodí štúdium alebo akékoľvek iné poznámky k objednávke.",
+    processTitle: "Ako prebieha objednávka?",
+    processSteps: [
+      "Odošleš nezáväznú objednávku.",
+      "Príde ti úvodný e-mail s údajmi z objednávky; kliknutím na odkaz potvrdíš ich správnosť.",
+      "Do 24 hodín ti pošleme e-mail: potvrdíme čas z poznámky alebo navrhneme voľné termíny v danom mesiaci.",
+      "Zavoláme ti na číslo z objednávky a dohodneme si prvých 15 minút rozhovoru, kde doladíme čas štúdia.",
+      "Následne vystavíme predfaktúru s platbou na účet firmy.",
+      "Po prijatí platby vystavíme faktúru a môžeš začať s výučbou podľa plánu.",
+    ],
+    consultProcessTitle: "Ako prebieha úvodná konzultácia?",
+    consultProcessSteps: [
+      "Ozveme sa ti do 24 hodín od odoslania objednávky, vzhľadom na väčší počet žiadostí.",
+      "Dohodneme si krátky 15-minútový telefonát.",
+      "Porozprávame sa o tvojich cieľoch, podmienkach a možnostiach štúdia.",
+      "Zodpovieme tvoje otázky a navrhneme ďalšie kroky.",
+    ],
+    packageLabel: "Balíček",
+    packageHint: "Balík sa prispôsobí počtu hodín podľa pravidiel v cenníku.",
+    hoursLabel: "Počet hodín",
+    hoursHint: "1–29 = Doučovateľ, 30–159 = Študent, 160+ = Profesionál.",
+    savingsText: "Práve ste ušetrili {amount} — teraz ste v balíčku {package}.",
+    consultTitle: "Úvodná konzultácia",
+    consultDuration: "Trvanie: 15 minút",
+    consultPackageValue: "Úvodná konzultácia (15 minút)",
+    firstNameLabel: "Meno",
+    lastNameLabel: "Priezvisko",
+    emailLabel: "E-mail",
+    phoneLabel: "Telefónne číslo",
+    addressLabel: "Adresa",
+    notesLabel: "Poznámky",
+    notesPlaceholder: "Napíš, kedy sa ti hodí štúdium alebo ďalšie poznámky.",
+    submitOrder: "Odoslať objednávku",
+    submitConsultation: "Odoslať žiadosť",
+    consentText: "Súhlasím s {terms_link} a beriem na vedomie {privacy_link}.",
+    privacyLinkLabel: "Zásady ochrany osobných údajov",
+    termsLinkLabel: "Všeobecnými obchodnými podmienkami",
+    honeypotLabel: "Webová stránka",
+    errors: {
+      hoursRequired: "Zadaj počet hodín.",
+      recaptcha: "Potvrď, že nie si robot.",
+      spam: "Formulár vyzerá ako spam. Skús to znova.",
+      consentRequired: "Musíš súhlasiť s podmienkami a zásadami ochrany osobných údajov.",
+      requiredFields: "Prosím, vyplň všetky povinné polia.",
+    },
   },
 };
 

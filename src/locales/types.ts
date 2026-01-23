@@ -14,6 +14,8 @@
     home: { title: string; lead: string };
     services: { title: string; lead: string };
     pricing: { title: string; lead: string };
+    tech: { title: string; lead: string };
+    order: { title: string; lead: string };
     studentWork: { title: string; lead: string };
     faq: { title: string; lead: string };
     privacy: { title: string; lead: string };
@@ -148,6 +150,48 @@
     roiText: string;
     roiNote: string;
     consultCta: string;
+    techCta: string;
+  };
+  techPage: {
+    title: string;
+    lead: string;
+    sections: { title: string; items: string[] }[];
+    note: string;
+  };
+  orderPage: {
+    intro: string;
+    processTitle: string;
+    processSteps: string[];
+    consultProcessTitle: string;
+    consultProcessSteps: string[];
+    packageLabel: string;
+    packageHint: string;
+    hoursLabel: string;
+    hoursHint: string;
+    savingsText: string;
+    consultTitle: string;
+    consultDuration: string;
+    consultPackageValue: string;
+    firstNameLabel: string;
+    lastNameLabel: string;
+    emailLabel: string;
+    phoneLabel: string;
+    addressLabel: string;
+    notesLabel: string;
+    notesPlaceholder: string;
+    submitOrder: string;
+    submitConsultation: string;
+    consentText: string;
+    privacyLinkLabel: string;
+    termsLinkLabel: string;
+    honeypotLabel: string;
+    errors: {
+      hoursRequired: string;
+      recaptcha: string;
+      spam: string;
+      consentRequired: string;
+      requiredFields: string;
+    };
   };
   pythonPage: {
     title: string;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useI18n } from "@/app/I18nProvider";
 import Picture from "@/components/Picture";
 import doucovatelImageWebp from "@/assets/pictures_webp/prices/doucovatel.webp";
@@ -11,8 +12,10 @@ const PricingPage = () => {
   const { t } = useI18n();
   const packageImagesWebp = [doucovatelImageWebp, studentImageWebp, profesionalImageWebp];
   const packageImagesFallback = [doucovatelImage, studentImage, profesionalImage];
+  const packageKeys = ["doucovatel", "student", "profesional"] as const;
   const packages = t.pricingPage.packages.map((item, index) => ({
     ...item,
+    key: packageKeys[index] ?? packageKeys[0],
     imageWebp: packageImagesWebp[index] ?? packageImagesWebp[0],
     imageFallback: packageImagesFallback[index] ?? packageImagesFallback[0],
   }));
@@ -70,12 +73,12 @@ const PricingPage = () => {
                   ))}
                 </ul>
                 <p className="text-sm font-medium text-slate-700">{pack.note}</p>
-                <button
-                  type="button"
+                <Link
+                  to={`/objednavka?package=${pack.key}`}
                   className="mt-auto inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
                 >
                   {pack.cta}
-                </button>
+                </Link>
               </div>
             </article>
           ))}
@@ -86,12 +89,18 @@ const PricingPage = () => {
         <h2 className="text-2xl font-semibold text-slate-900">{t.pricingPage.roiTitle}</h2>
         <p className="mt-2 text-slate-600">{t.pricingPage.roiText}</p>
         <p className="mt-4 text-sm font-medium text-slate-700">{t.pricingPage.roiNote}</p>
-        <button
-          type="button"
+        <Link
+          to="/objednavka?type=consultation"
           className="mt-6 inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           {t.pricingPage.consultCta}
-        </button>
+        </Link>
+        <Link
+          to="/technicke-podmienky"
+          className="mt-3 inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+        >
+          {t.pricingPage.techCta}
+        </Link>
       </section>
     </section>
   );
