@@ -7,13 +7,14 @@ const enServices = {
   },
   servicesPage: {
     title: "Learn to code efficiently",
-    lead: "Tired of endless tutorials that lead nowhere? At RedBlue Academy you get a clear plan, a mentor, and feedback so you keep moving forward without guessing.",
+    lead: "Tired of endless tutorials that lead nowhere? At RedBlue Academy you get a clear plan, a mentor, and support. After the fundamentals you can choose two paths: classic (manual coding) or modern (tools and later AI).",
     mentorTitle: "Individual guidance that makes the difference",
     mentorText: "You do not just learn to code — you learn to think like a developer. Each lesson is a live interaction with a mentor who adapts to your level, pace, and goals. Instead of endless Googling, you get immediate answers, feedback, and motivation.",
     highlightsTitle: "Why choose RedBlue Academy?",
     highlights: [
       "Personal approach without pre-recorded courses",
       "Faster progress with a clear roadmap",
+      "Two learning paths: classic and modern with tools",
       "Flexible online learning from anywhere",
       "Practical focus on real projects",
       "Motivating guidance and community support",

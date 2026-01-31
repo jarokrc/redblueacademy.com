@@ -115,7 +115,9 @@
       spam: "Diese Anfrage wirkt wie Spam. Bitte versuche es erneut.",
       consentRequired: "Du musst den Bedingungen zustimmen und die Datenschutzerklärung zur Kenntnis nehmen.",
       requiredFields: "Bitte fülle alle Pflichtfelder aus.",
+      submitFailed: "Es ist ein Fehler aufgetreten. Bitte versuche es später erneut.",
     },
+    successMessage: "Danke! Wir haben deine Bestellung erhalten und melden uns bei dir.",
   },
 };
 

@@ -116,7 +116,9 @@
       spam: "Formulár vyzerá ako spam. Skús to znova.",
       consentRequired: "Musíš súhlasiť s podmienkami a zásadami ochrany osobných údajov.",
       requiredFields: "Prosím, vyplň všetky povinné polia.",
+      submitFailed: "Niečo sa pokazilo. Skús to ešte raz o chvíľu.",
     },
+    successMessage: "Ďakujeme! Objednávku sme prijali a ozveme sa ti.",
   },
 };
 

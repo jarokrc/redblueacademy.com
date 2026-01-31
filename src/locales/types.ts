@@ -191,7 +191,9 @@
       spam: string;
       consentRequired: string;
       requiredFields: string;
+      submitFailed: string;
     };
+    successMessage: string;
   };
   pythonPage: {
     title: string;

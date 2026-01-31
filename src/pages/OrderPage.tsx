@@ -61,8 +61,11 @@ const OrderPage = () => {
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("type") === "consultation" ? "consultation" : "package";
   const recaptchaSiteKey = (import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined)?.trim() ?? "";
-  const recaptchaEnabled = Boolean(recaptchaSiteKey);
-  const recaptchaRef = useRef<HTMLDivElement>(null);
+  const recaptchaAction = (import.meta.env.VITE_RECAPTCHA_ACTION as string | undefined)?.trim() ?? "order";
+  const apiBaseUrl = (import.meta.env.VITE_ORDER_API_BASE_URL as string | undefined)?.trim() ?? "";
+  // TEMP: Disable reCAPTCHA while testing API connectivity.
+  const recaptchaEnabled = false;
+  const recaptchaLoaderRef = useRef<Promise<any> | null>(null);
 
   const packageOptions = useMemo<PackageOption[]>(() => {
     const labels = t.pricingPage.packages;
@@ -105,9 +108,10 @@ const OrderPage = () => {
   const [baselinePackageKey, setBaselinePackageKey] = useState<PackageOption["key"]>(initialPackage.key);
   const [savingsAmount, setSavingsAmount] = useState<number | null>(null);
   const [honeypot, setHoneypot] = useState("");
-  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [consentChecked, setConsentChecked] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const formStartedAt = useMemo(() => Date.now(), []);
 
   const selectedPackage = packageOptions.find((option) => option.key === selectedPackageKey) ?? initialPackage;
@@ -155,39 +159,32 @@ const OrderPage = () => {
         .replace("{amount}", formatCurrency(savingsAmount, locale))
         .replace("{package}", selectedPackage.label)
     : null;
-  const canSubmit = (!recaptchaEnabled || Boolean(recaptchaToken)) && consentChecked;
+  const canSubmit = consentChecked && !isSubmitting;
 
-  useEffect(() => {
-    if (!recaptchaEnabled) return;
-    const scriptId = "recaptcha-script";
-    const renderRecaptcha = () => {
-      const grecaptcha = (window as unknown as { grecaptcha?: any }).grecaptcha;
-      if (!grecaptcha || !recaptchaRef.current) return;
-      if (recaptchaRef.current.childElementCount > 0) return;
-      grecaptcha.render(recaptchaRef.current, {
-        sitekey: recaptchaSiteKey,
-        callback: (token: string) => setRecaptchaToken(token),
-        "expired-callback": () => setRecaptchaToken(""),
-        "error-callback": () => setRecaptchaToken(""),
-      });
-    };
+  const loadRecaptcha = () => {
+    if (!recaptchaEnabled) return Promise.resolve(null);
+    const existing = (window as unknown as { grecaptcha?: any }).grecaptcha;
+    if (existing) return Promise.resolve(existing);
+    if (recaptchaLoaderRef.current) return recaptchaLoaderRef.current;
 
-    if (document.getElementById(scriptId)) {
-      renderRecaptcha();
-      return;
-    }
+    recaptchaLoaderRef.current = new Promise((resolve, reject) => {
+      const scriptId = "recaptcha-script";
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(recaptchaSiteKey)}`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve((window as unknown as { grecaptcha?: any }).grecaptcha);
+      script.onerror = () => reject(new Error("recaptcha_load_failed"));
+      document.body.appendChild(script);
+    });
 
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://www.google.com/recaptcha/api.js";
-    script.async = true;
-    script.defer = true;
-    script.onload = renderRecaptcha;
-    document.body.appendChild(script);
-  }, [recaptchaEnabled, recaptchaSiteKey]);
+    return recaptchaLoaderRef.current;
+  };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setFormError(null);
+    setFormSuccess(null);
     if (honeypot.trim()) {
       event.preventDefault();
       setFormError(t.orderPage.errors.spam);
@@ -203,16 +200,65 @@ const OrderPage = () => {
       setFormError(t.orderPage.errors.consentRequired);
       return;
     }
-    if (recaptchaEnabled && !recaptchaToken) {
-      event.preventDefault();
-      setFormError(t.orderPage.errors.recaptcha);
-      return;
-    }
     const form = event.currentTarget;
     if (!form.checkValidity()) {
       event.preventDefault();
       setFormError(t.orderPage.errors.requiredFields);
       form.reportValidity();
+      return;
+    }
+
+    if (!apiBaseUrl) {
+      return;
+    }
+
+    event.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      let nextRecaptchaToken = "";
+      if (recaptchaEnabled) {
+        const grecaptcha = await loadRecaptcha();
+        if (!grecaptcha || !grecaptcha.execute) {
+          setFormError(t.orderPage.errors.recaptcha);
+          return;
+        }
+        await new Promise((resolve) => grecaptcha.ready(resolve));
+        nextRecaptchaToken = await grecaptcha.execute(recaptchaSiteKey, { action: recaptchaAction });
+        if (!nextRecaptchaToken) {
+          setFormError(t.orderPage.errors.recaptcha);
+          return;
+        }
+      }
+
+      const data = new FormData(form);
+      data.set("locale", locale);
+      const payload: Record<string, string> = {};
+      data.forEach((value, key) => {
+        payload[key] = String(value);
+      });
+      if (recaptchaEnabled) {
+        payload.recaptchaToken = nextRecaptchaToken;
+        payload.recaptchaAction = recaptchaAction;
+      }
+
+      const response = await fetch(`${apiBaseUrl.replace(/\/$/, "")}/api/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        setFormError(t.orderPage.errors.submitFailed);
+        return;
+      }
+
+      setFormSuccess(t.orderPage.successMessage);
+    } catch (error) {
+      setFormError(t.orderPage.errors.submitFailed);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -232,8 +278,6 @@ const OrderPage = () => {
           />
         </div>
         <input type="hidden" name="formStartedAt" value={formStartedAt} />
-        {recaptchaEnabled ? <input type="hidden" name="recaptchaToken" value={recaptchaToken} /> : null}
-
         {mode === "consultation" ? (
           <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
             <p className="text-sm font-semibold text-blue-700">{t.orderPage.consultTitle}</p>
@@ -390,7 +434,6 @@ const OrderPage = () => {
           />
         </div>
 
-        {recaptchaEnabled ? <div ref={recaptchaRef} className="min-h-[78px]" /> : null}
         {formError ? (
           <div role="alert" className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
             {formError}
@@ -423,6 +466,12 @@ const OrderPage = () => {
         >
           {mode === "consultation" ? t.orderPage.submitConsultation : t.orderPage.submitOrder}
         </button>
+
+        {formSuccess ? (
+          <div role="status" className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+            {formSuccess}
+          </div>
+        ) : null}
       </form>
     </PageShell>
   );

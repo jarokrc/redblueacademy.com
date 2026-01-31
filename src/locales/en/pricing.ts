@@ -115,7 +115,9 @@
       spam: "This submission looks like spam. Please try again.",
       consentRequired: "You must agree to the terms and acknowledge the privacy policy.",
       requiredFields: "Please fill in all required fields.",
+      submitFailed: "Something went wrong. Please try again shortly.",
     },
+    successMessage: "Thank you! We received your order and will get back to you.",
   },
 };
 

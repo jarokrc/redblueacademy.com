@@ -8,20 +8,12 @@ import CookieBanner from "@/components/CookieBanner";
 import logoWebp from "@/assets/logo/academy.webp";
 import logoPng from "@/assets/logo/academy.png";
 import Picture from "@/components/Picture";
-import skFlagWebp from "@/assets/languages/sk.webp";
-import enFlagWebp from "@/assets/languages/en.webp";
-import deFlagWebp from "@/assets/languages/de.webp";
-import skFlagPng from "@/assets/languages/sk.png";
-import enFlagPng from "@/assets/languages/en.png";
-import deFlagPng from "@/assets/languages/de.png";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { t, locale, setLocale } = useI18n();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  // const newsletterUrl = "https://newsletter.redblue.sk/lists/?p=subscribe&list=3";
-  // const newsletterConsentToken = "{privacy_link}";
-  // const newsletterConsentParts = t.newsletter.consentText.split(newsletterConsentToken);
+
 
   useEffect(() => {
     setMenuOpen(false);
@@ -36,9 +28,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
   ];
 
   const languageOptions = [
-    { value: "sk" as Locale, label: "SK", name: "Slovak", flagWebp: skFlagWebp, flagPng: skFlagPng },
-    { value: "en" as Locale, label: "EN", name: "English", flagWebp: enFlagWebp, flagPng: enFlagPng },
-    { value: "de" as Locale, label: "DE", name: "Deutsch", flagWebp: deFlagWebp, flagPng: deFlagPng },
+    { value: "sk" as Locale, label: "SK" },
+    { value: "en" as Locale, label: "EN" },
+    { value: "de" as Locale, label: "DE" },
   ];
 
   const seoMap = [
@@ -101,8 +93,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
     const active = languageOptions.find((option) => option.value === locale) ?? languageOptions[0];
     const buttonClass = fullWidth
-      ? "flex w-full items-center justify-between gap-3 rounded border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700"
-      : "flex items-center gap-3 rounded border border-slate-300 bg-white px-3 py-1 text-sm text-slate-700";
+      ? "flex w-full items-center justify-between rounded-full border border-slate-300 bg-white/80 px-3 py-2 text-sm font-semibold leading-none text-slate-900 shadow-md"
+      : "inline-flex items-center rounded-full border border-slate-300 bg-white/80 px-3 py-2 text-sm font-semibold leading-none text-slate-900 shadow-md";
     const listClass = fullWidth
       ? "absolute left-0 top-full z-20 mt-2 w-full rounded-lg border border-slate-200 bg-white p-2 shadow-lg"
       : "absolute right-0 top-full z-20 mt-2 w-40 rounded-lg border border-slate-200 bg-white p-2 shadow-lg";
@@ -119,18 +111,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           onClick={() => setOpen((prev) => !prev)}
           className={buttonClass}
         >
-          <span className="flex items-center gap-2">
-            <span className="h-5 w-5 overflow-hidden rounded-full bg-slate-100">
-              <Picture
-                webpSrc={active.flagWebp}
-                fallbackSrc={active.flagPng}
-                alt={`${active.name} flag`}
-                className="h-full w-full object-cover"
-              />
-            </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">{active.label}</span>
-          </span>
-          <span className="text-xs text-slate-500">v</span>
+          <span>{active.label}</span>
         </button>
 
         {open ? (
@@ -147,20 +128,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                     option.value === locale ? "bg-slate-100 text-blue-700" : "text-slate-700 hover:bg-slate-100"
                   }`}
                 >
-                  <span className="flex items-center gap-2">
-                    <span className="h-5 w-5 overflow-hidden rounded-full bg-slate-100">
-                      <Picture
-                        webpSrc={option.flagWebp}
-                        fallbackSrc={option.flagPng}
-                        alt={`${option.name} flag`}
-                        className="h-full w-full object-cover"
-                      />
-                    </span>
-                    <span className="text-sm font-medium">{option.name}</span>
-                  </span>
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                    {option.label}
-                  </span>
+                  <span className="text-sm font-semibold">{option.label}</span>
                 </button>
               </li>
             ))}
@@ -261,58 +229,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
                   {t.footer.cookies}
                 </Link>
               </div>
-              © 2026 RedBlueAcademy.com
+              © 2026 academy.redblue.sk
               </a>
             </div>
 
-            {/*
-            <div className="w-full max-w-md space-y-3">
-              <p className="text-sm font-semibold text-slate-900">{t.newsletter.title}</p>
-              <p className="text-xs text-slate-500">{t.newsletter.description}</p>
-              <form
-                action={newsletterUrl}
-                method="post"
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-col gap-2 sm:flex-row"
-              >
-                <label htmlFor="newsletter-email" className="sr-only">
-                  {t.newsletter.emailPlaceholder}
-                </label>
-                <input
-                  id="newsletter-email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  placeholder={t.newsletter.emailPlaceholder}
-                  className="flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-                />
-                <input type="hidden" name="list[3]" value="signup" />
-                <input type="hidden" name="htmlemail" value="1" />
-                <input type="hidden" name="subscribe" value="subscribe" />
-                <button
-                  type="submit"
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
-                >
-                  {t.newsletter.submitLabel}
-                </button>
-              </form>
-              <p className="text-xs text-slate-500">
-                {newsletterConsentParts.length === 2 ? (
-                  <>
-                    {newsletterConsentParts[0]}
-                    <Link to="/zasady-ochrany-osobnych-udajov" className="font-semibold text-blue-600 hover:text-blue-700">
-                      {t.newsletter.privacyLinkLabel}
-                    </Link>
-                    {newsletterConsentParts[1]}
-                  </>
-                ) : (
-                  t.newsletter.consentText
-                )}
-              </p>
-            </div>
-            */}
+           
           </div>
         </div>
       </footer>

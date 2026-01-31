@@ -1,4 +1,5 @@
 ﻿import { useI18n } from "@/app/I18nProvider";
+import IntroCanvas from "@/components/IntroCanvas";
 import introVideoWebm from "@/assets/intro/intro1.webm";
 import introVideoMp4 from "@/assets/intro/intro1.mp4";
 import spotlightImageWebp from "@/assets/pictures_webp/pic5.webp";
@@ -9,8 +10,10 @@ const HomePage = () => {
   const { t } = useI18n();
 
   return (
-    <section className="space-y-16">
-      <section className="relative left-1/2 right-1/2 -mx-[50vw] -mt-10 w-screen overflow-hidden bg-slate-900">
+    <>
+      <IntroCanvas />
+      <section className="space-y-16">
+        <section className="relative left-1/2 right-1/2 -mx-[50vw] -mt-10 w-screen overflow-hidden bg-slate-900">
         <div className="absolute inset-0" aria-hidden="true">
           <video
             className="h-full w-full object-cover object-[70%_50%] md:object-[50%_25%] xl:object-[50%_20%] 2xl:object-[50%_15%]"
@@ -99,7 +102,8 @@ const HomePage = () => {
           />
         </div>
       </section>
-    </section>
+      </section>
+    </>
   );
 };
 

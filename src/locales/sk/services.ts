@@ -7,14 +7,15 @@ const skServices = {
   },
   servicesPage: {
     title: "Naučte sa programovať efektívne",
-    lead: "Už vás nebaví večné samoučenie z videí a tutoriálov, ktoré nikam nevedú? V RedBlue Academy získate jasný plán, mentora a podporu, aby ste napredovali bez blúdenia.",
+    lead: "Už vás nebaví večné samoučenie z videí a tutoriálov, ktoré nikam nevedú? V RedBlue Academy získate jasný plán, mentora a podporu. Po zvládnutí základov si môžete vybrať dve cesty: klasickú (kód píšete sami) alebo modernú (využívate nástroje a neskôr aj AI).",
     mentorTitle: "Individuálne vedenie, ktoré robí rozdiel",
     mentorText: "U nás sa neučíte len programovať – učíte sa myslieť ako programátor. Každá hodina je živá interakcia s lektorom, ktorý vás vedie krok za krokom a prispôsobuje výučbu vašej úrovni, tempu a cieľom. Namiesto nekonečného googlenia dostávate okamžité odpovede, spätnú väzbu a motiváciu ísť ďalej.",
     highlightsTitle: "Prečo si vybrať RedBlue Academy?",
     highlights: [
       "Osobný prístup bez nahratých kurzov",
       "Rýchlejší pokrok s jasným plánom",
-      "Flexibilné online štúdium odkiaľkoľvek",
+      "Dve cesty učenia: klasická aj moderná s nástrojmi",
+      "Flexibilné online štúdium odkiaľokoľvek",
       "Praktické zameranie na reálne projekty",
       "Motivujúce vedenie a podpora komunity",
     ],

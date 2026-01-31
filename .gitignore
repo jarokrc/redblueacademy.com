@@ -12,8 +12,18 @@ coverage/
 .env.*
 !.env.example
 
-# assets
+# assets & media
 src/assets/
+public/
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.webp
+**/*.svg
+**/*.gif
+**/*.avif
+**/*.mp4
+**/*.webm
 
 # logs & caches
 *.log
