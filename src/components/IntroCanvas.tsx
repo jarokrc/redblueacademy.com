@@ -343,7 +343,11 @@ const renderCircuit = (
   }
 };
 
-const IntroCanvas = () => {
+type IntroCanvasProps = {
+  onComplete?: () => void;
+};
+
+const IntroCanvas = ({ onComplete }: IntroCanvasProps) => {
   const [bootDone, setBootDone] = useState(false);
   const [isImploding, setIsImploding] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -356,19 +360,6 @@ const IntroCanvas = () => {
     if (typeof window === "undefined") {
       setBootDone(true);
       return;
-    }
-    const introStorageKey = "rb-academy-intro-last-seen";
-    if (typeof localStorage !== "undefined") {
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(
-        now.getDate()
-      ).padStart(2, "0")}`;
-      const lastSeen = localStorage.getItem(introStorageKey);
-      if (lastSeen === today) {
-        setBootDone(true);
-        return;
-      }
-      localStorage.setItem(introStorageKey, today);
     }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setBootDone(true);
@@ -426,6 +417,10 @@ const IntroCanvas = () => {
       window.removeEventListener("resize", resize);
     };
   }, []);
+
+  useEffect(() => {
+    if (bootDone) onComplete?.();
+  }, [bootDone, onComplete]);
 
   return (
     <div

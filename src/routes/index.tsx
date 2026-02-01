@@ -1,5 +1,6 @@
 ﻿import type { ReactElement } from "react";
 import HomePage from "@/pages/HomePage";
+import IntroPage from "@/pages/IntroPage";
 import ServicesPage from "@/pages/ServicesPage";
 import PricingPage from "@/pages/PricingPage";
 import OrderPage from "@/pages/OrderPage";
@@ -19,7 +20,8 @@ export type AppRoute = {
 };
 
 export const appRoutes: AppRoute[] = [
-  { path: "/", element: <HomePage /> },
+  { path: "/", element: <IntroPage /> },
+  { path: "/home", element: <HomePage /> },
   { path: "/sluzby", element: <ServicesPage /> },
   { path: "/sluzby/python", element: <PythonPage /> },
   { path: "/sluzby/csharp", element: <CsharpPage /> },

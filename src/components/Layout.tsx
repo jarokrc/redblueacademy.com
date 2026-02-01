@@ -19,8 +19,15 @@ const Layout = ({ children }: { children: ReactNode }) => {
     setMenuOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onScroll = () => setMenuOpen(false);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [menuOpen]);
+
   const navItems = [
-    { to: "/", label: t.nav.home },
+    { to: "/home", label: t.nav.home },
     { to: "/sluzby", label: t.nav.services },
     { to: "/cennik", label: t.nav.pricing },
     { to: "/prace-studentov", label: t.nav.studentWork },
@@ -34,7 +41,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   ];
 
   const seoMap = [
-    { path: "/", title: t.pages.home.title, description: t.pages.home.lead },
+    { path: "/home", title: t.pages.home.title, description: t.pages.home.lead },
     { path: "/sluzby", title: t.pages.services.title, description: t.pages.services.lead },
     { path: "/cennik", title: t.pages.pricing.title, description: t.pages.pricing.lead },
     { path: "/technicke-podmienky", title: t.pages.tech.title, description: t.pages.tech.lead },
@@ -144,7 +151,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-5">
           <div className="flex items-center gap-6">
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/home" className="flex items-center gap-3">
               <Picture
                 webpSrc={logoWebp}
                 fallbackSrc={logoPng}
@@ -205,18 +212,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <main id="main-content" className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
         {children}
       </main>
-
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-8">
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
             <div className="space-y-3 text-sm text-slate-600">
-              <a
-                href="https://www.redblue.sk"
-                className="font-medium text-slate-600 hover:text-blue-700"
-                target="_blank"
-                rel="noreferrer"
-              >
-                
               
               <div className="flex flex-wrap items-center gap-4">
                 <Link to="/zasady-ochrany-osobnych-udajov" className="hover:text-blue-700">
@@ -228,12 +227,20 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 <Link to="/cookies" className="hover:text-blue-700">
                   {t.footer.cookies}
                 </Link>
+                
               </div>
-              © 2026 academy.redblue.sk
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <p>© 2026 academy.redblue.sk</p>
+                <a
+                  href="https://www.redblue.sk"
+                  className="inline-flex font-medium text-slate-600 hover:text-blue-700"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  www.redblue.sk
+                </a>
+              </div>
             </div>
-
-           
           </div>
         </div>
       </footer>
