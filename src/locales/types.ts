@@ -158,6 +158,24 @@
     sections: { title: string; items: string[] }[];
     note: string;
   };
+  contactPage: {
+    title: string;
+    lead: string;
+    consultationLabel: string;
+    packageLabel: string;
+    packageFallback: string;
+    notice: string;
+    processTitle: string;
+    processSteps: string[];
+    contact: {
+      prompt: string;
+      placeholder: string;
+      error: string;
+      revealCta: string;
+      copy: string;
+      copied: string;
+    };
+  };
   orderPage: {
     intro: string;
     processTitle: string;

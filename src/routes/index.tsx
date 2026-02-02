@@ -4,6 +4,7 @@ import IntroPage from "@/pages/IntroPage";
 import ServicesPage from "@/pages/ServicesPage";
 import PricingPage from "@/pages/PricingPage";
 import OrderPage from "@/pages/OrderPage";
+import ContactPage from "@/pages/ContactPage";
 import TechnicalRequirementsPage from "@/pages/TechnicalRequirementsPage";
 import StudentWorkPage from "@/pages/StudentWorkPage";
 import FaqPage from "@/pages/FaqPage";
@@ -27,6 +28,7 @@ export const appRoutes: AppRoute[] = [
   { path: "/sluzby/csharp", element: <CsharpPage /> },
   { path: "/cennik", element: <PricingPage /> },
   { path: "/technicke-podmienky", element: <TechnicalRequirementsPage /> },
+  { path: "/kontakt", element: <ContactPage /> },
   { path: "/objednavka", element: <OrderPage /> },
   { path: "/prace-studentov", element: <StudentWorkPage /> },
   { path: "/faq", element: <FaqPage /> },

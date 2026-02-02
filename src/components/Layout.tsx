@@ -45,6 +45,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     { path: "/sluzby", title: t.pages.services.title, description: t.pages.services.lead },
     { path: "/cennik", title: t.pages.pricing.title, description: t.pages.pricing.lead },
     { path: "/technicke-podmienky", title: t.pages.tech.title, description: t.pages.tech.lead },
+    { path: "/kontakt", title: t.pages.order.title, description: t.pages.order.lead },
     { path: "/objednavka", title: t.pages.order.title, description: t.pages.order.lead },
     { path: "/prace-studentov", title: t.pages.studentWork.title, description: t.pages.studentWork.lead },
     { path: "/faq", title: t.pages.faq.title, description: t.pages.faq.lead },

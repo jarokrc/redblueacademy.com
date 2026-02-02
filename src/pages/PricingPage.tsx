@@ -74,7 +74,7 @@ const PricingPage = () => {
                 </ul>
                 <p className="text-sm font-medium text-slate-700">{pack.note}</p>
                 <Link
-                  to={`/objednavka?package=${pack.key}`}
+                  to={`/kontakt?mode=package&package=${pack.key}`}
                   className="mt-auto inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
                 >
                   {pack.cta}
@@ -90,7 +90,7 @@ const PricingPage = () => {
         <p className="mt-2 text-slate-600">{t.pricingPage.roiText}</p>
         <p className="mt-4 text-sm font-medium text-slate-700">{t.pricingPage.roiNote}</p>
         <Link
-          to="/objednavka?type=consultation"
+          to="/kontakt?mode=consultation"
           className="mt-6 inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           {t.pricingPage.consultCta}
