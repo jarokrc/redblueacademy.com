@@ -215,32 +215,28 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </main>
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-8">
-          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-            <div className="space-y-3 text-sm text-slate-600">
-              
-              <div className="flex flex-wrap items-center gap-4">
-                <Link to="/zasady-ochrany-osobnych-udajov" className="hover:text-blue-700">
-                  {t.footer.privacy}
-                </Link>
-                <Link to="/vseobecne-obchodne-podmienky" className="hover:text-blue-700">
-                  {t.footer.terms}
-                </Link>
-                <Link to="/cookies" className="hover:text-blue-700">
-                  {t.footer.cookies}
-                </Link>
-                
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <p>© 2026 academy.redblue.sk</p>
-                <a
-                  href="https://www.redblue.sk"
-                  className="inline-flex font-medium text-slate-600 hover:text-blue-700"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  www.redblue.sk
-                </a>
-              </div>
+          <div className="flex flex-col gap-4 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
+            <div className="order-1 flex flex-wrap items-center gap-x-4 gap-y-2 md:order-2 md:justify-end">
+              <Link to="/zasady-ochrany-osobnych-udajov" className="hover:text-blue-700">
+                {t.footer.privacy}
+              </Link>
+              <Link to="/vseobecne-obchodne-podmienky" className="hover:text-blue-700">
+                {t.footer.terms}
+              </Link>
+              <Link to="/cookies" className="hover:text-blue-700">
+                {t.footer.cookies}
+              </Link>
+            </div>
+            <div className="order-last w-full flex flex-col-reverse gap-1 md:order-1 md:w-auto md:flex-row md:items-center md:gap-3">
+              <p>{"\u00A9"} 2026 academy.redblue.sk</p>
+              <a
+                href="https://www.redblue.sk"
+                className="inline-flex font-medium text-slate-600 hover:text-blue-700"
+                target="_blank"
+                rel="noreferrer"
+              >
+                www.redblue.sk
+              </a>
             </div>
           </div>
         </div>
