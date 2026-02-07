@@ -40,13 +40,6 @@ const HomePage = () => {
             ))}
           </ul>
 
-          <button
-            type="button"
-            className="mt-8 rounded-full border border-white/70 px-6 py-2 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10"
-          >
-            {t.home.cta}
-          </button>
-
           <div className="mt-12 grid w-full gap-4 text-left md:grid-cols-3">
             {t.home.cards.map((card) => (
               <article key={card.title} className="rounded-xl border border-white/10 bg-white/10 p-5 backdrop-blur">
